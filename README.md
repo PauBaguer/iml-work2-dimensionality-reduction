@@ -9,7 +9,7 @@
 ## Install env
 Open folder in terminal
 ```bash
-cd <root_folder_of_project>/
+cd iml-work2-dimensionality-reduction/
 ```
 2. Create virtual env
 ```bash
