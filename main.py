@@ -119,3 +119,40 @@ if __name__ == '__main__':
     plt.title('Feature importance (chi-squared test) for pen dataset')
     plt.show()
     
+    #####################################
+    #           N best plots            #
+    #####################################
+    
+    import itertools
+
+    # Select the top 5 features for each dataset
+    k=4
+    selector_adult = SelectKBest(score_func=f_classif, k=k)
+    X_adult = selector_adult.fit_transform(preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df)
+    selected_adult = selector_adult.get_support(indices=True)
+
+    selector_vowel = SelectKBest(score_func=f_classif, k=k)
+    X_vowel = selector_vowel.fit_transform(preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df)
+    selected_vowel = selector_vowel.get_support(indices=True)
+
+    selector_pen = SelectKBest(score_func=f_classif, k=k)
+    X_pen = selector_pen.fit_transform(preprocessing.pp_pen_based_df, preprocessing.pp_gs_pen_based_df)
+    selected_pen = selector_pen.get_support(indices=True)
+
+    # Create a grid of plots for each pair of features
+    datasets = [(X_adult, preprocessing.pp_gs_adult_df, selected_adult, 'adult'),
+                (X_vowel, preprocessing.pp_gs_vowel_df, selected_vowel, 'vowel'),
+                (X_pen, preprocessing.pp_gs_pen_based_df, selected_pen, 'pen')]
+
+    for X, y, selected, dataset_name in datasets:
+        plt.figure(figsize=(10, 8))
+        plt.subplots_adjust(hspace=0.8, wspace=0.8) # Add this line to increase the distance between subplots
+        n=1
+        for i, j in itertools.combinations(range(X.shape[1]), 2):
+            plt.subplot(3, 2, n)
+            plt.scatter(X[:, i], X[:, j], c=y)
+            plt.xlabel('Feature ' + str(selected[i]))
+            plt.ylabel('Feature ' + str(selected[j]))
+            plt.title(f'{dataset_name} dataset: Features {selected[i]} vs {selected[j]}', fontsize=10)
+            n+=1
+        plt.show()
