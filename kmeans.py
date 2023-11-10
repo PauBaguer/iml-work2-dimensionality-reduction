@@ -103,11 +103,11 @@ def kmeans(data, num_clusters, max_iter=5000, metric='l2', centroid_init='kmeans
         i += 1
     # Compute the final cluster assignation for the data
     assigned_cluster = []
-    for row in data:
+    for row in data: 
         distance = [metric_function(row, centroids)]
         index = np.argmin(distance)
         assigned_cluster.append(index)
-    return centroids, assigned_cluster
+    return assigned_cluster, centroids
 
 def plot_kmeans_graphs(df, dataset_name, real_k, range_k=4):
     n_clusters = []
