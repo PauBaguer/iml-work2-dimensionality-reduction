@@ -3,7 +3,7 @@ from sklearn import metrics
 from sklearn.cluster import Birch
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-def birch(X, threshold, n_clusters):
+def birch(X, n_clusters, threshold=0.5):
     brc = Birch(n_clusters=n_clusters, threshold=threshold).fit(X)
     res = brc.predict(X)
     labels = brc.labels_

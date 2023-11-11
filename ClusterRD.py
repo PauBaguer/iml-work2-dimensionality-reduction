@@ -1,10 +1,10 @@
 from pca import Pca
 from sklearn.decomposition import TruncatedSVD
-from kmeans import Kmeans
+from kmeans import kmeans
 from birch import birch
 
 class Cluster:
-    def __init__(self, dataset_name, k, data, gs, reduction_method, clustering_method):
+    def __init__(self, dataset_name, k, data, gs, reduction_method):
         self.dataset_name = dataset_name
         self.k = k
         self.data = data
@@ -19,7 +19,7 @@ class Cluster:
         
     def clustering(self, clustering_method, c):
         if clustering_method == 'kmeans':
-            clustering = Kmeans.kmeans(self.reduced, c)
+            clustering = kmeans(self.reduced, c)
         elif clustering_method == 'birch':
             clustering = birch(self.reduced, c)
         else:

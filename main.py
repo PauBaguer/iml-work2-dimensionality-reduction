@@ -9,6 +9,7 @@ from preprocessing import Preprocessing
 from sklearn.decomposition import PCA
 from pca import Pca
 import birch, kmeans
+from ClusterRD import Cluster
 from sklearn.feature_selection import SelectKBest, SelectPercentile, f_classif, chi2, mutual_info_classif
 
 def load_arff(f_name):
@@ -210,5 +211,14 @@ if __name__ == '__main__':
     print("SKLEARN")
     pca = PCA(n_components=2)
     pca.fit(test_arr2)
+    
     print("Covariance matrix")
     print(pca.get_covariance())
+    
+    labels_adult_svd_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('birch', 2)
+    labels_adult_svd_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('kmeans', 2)
+    
+    labels_adult_pca_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('birch', 2)
+    labels_adult_pca_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('kmeans', 2)
+   
+    
