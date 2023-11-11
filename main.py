@@ -165,27 +165,15 @@ if __name__ == '__main__':
     #                PCA                #
     #####################################
 
-    # TODO: select k for eigenvalues > 1
     # TODO: ASK TEACHER FOR DECIMAL PROBLEM
     # TODO: add eigenvectors to plots, plot for datasets.
     # np.set_printoptions(threshold=sys.maxsize)
-    # adult_pca = Pca(preprocessing.pp_adult_df, 'Adult', 5)
-    # vowel_pca = Pca(preprocessing.pp_vowel_df, 'Vowel', 5)
-    #pen_based_pca = Pca(preprocessing.pp_pen_based_df, 'Pen based', 5)
 
-    # test_arr2 = np.array([[9.0,39.0],
-    #                          [15.0,56.0],
-    #                          [25.0,93.0],
-    #                          [14.0,61.0],
-    #                          [10.0,50.0],
-    #                          [18.0,75.0],
-    #                          [0.0,32.0],
-    #                          [16.0,85.0],
-    #                          [5.0,42.0],
-    #                          [19.0,70.0],
-    #                          [16.0,66.0],
-    #                          [20.0,80.0]
-    #                          ])
+    # If k = -1, take only eigenvectors where eigenvalues are > 1.
+    adult_pca = Pca(preprocessing.pp_adult_df, dataset_name='Adult', k=-1)
+    vowel_pca = Pca(preprocessing.pp_vowel_df, dataset_name='Vowel', k=-1)
+    pen_based_pca = Pca(preprocessing.pp_pen_based_df, dataset_name='Pen based', k=-1)
+
 
     test_arr2 = np.array([
         [2.5,2.4],
@@ -205,21 +193,9 @@ if __name__ == '__main__':
     print("var:")
     print(test_arr2.var(axis=0))
 
-    test_pca = Pca(test_arr2, 'test', 2)
+    # If k = -1, take only eigenvectors where eigenvalues are > 1.
+    test_pca = Pca(test_arr2, dataset_name='test', k=-1)
 
-    print(test_pca.rotated_values)
-
-    plt.scatter(test_pca.data_adjust.T[0, :], test_pca.data_adjust.T[1, :])
-    plt.xlim([-2, 2])
-    plt.ylim([-2, 2])
-    plt.title("Mean data adjust")
-    plt.show()
-
-    plt.scatter(test_pca.rotated_values[0,:],test_pca.rotated_values[1,:])
-    plt.xlim([-2, 2])
-    plt.ylim([-2, 2])
-    plt.title("Transformed data")
-    plt.show()
 
     # print()
     # print("SKLEARN")
