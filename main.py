@@ -9,6 +9,7 @@ from preprocessing import Preprocessing
 from sklearn.decomposition import PCA
 from pca import Pca
 import birch, kmeans
+import truncatedSVDTest
 from sklearn.feature_selection import SelectKBest, SelectPercentile, f_classif, chi2, mutual_info_classif
 
 def load_arff(f_name):
@@ -203,3 +204,20 @@ if __name__ == '__main__':
     # print("Covariance matrix")
     # print(pca.get_covariance())
 
+    #####################################
+    #             Truncated SVD         #
+    #####################################
+    cluster = truncatedSVDTest.Cluster("Pen-Based", 10, preprocessing.pp_pen_based_df , preprocessing.pp_gs_pen_based_df)
+    cluster.plot_total_explained_variance(plot=True)
+    cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='birch')
+
+    cluster = truncatedSVDTest.Cluster("Vowel", 11, preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df)
+    cluster.plot_total_explained_variance(plot=True)
+    cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='birch')
+
+    cluster = truncatedSVDTest.Cluster("Adult", 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df)
+    cluster.plot_total_explained_variance(plot=True)
+    cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='birch')
