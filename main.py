@@ -207,17 +207,18 @@ if __name__ == '__main__':
     #####################################
     #             Truncated SVD         #
     #####################################
-    cluster = truncatedSVDTest.Cluster("Pen-Based", 10, preprocessing.pp_pen_based_df , preprocessing.pp_gs_pen_based_df)
-    cluster.plot_total_explained_variance(plot=True)
+    cluster = truncatedSVDTest.Cluster("Pen-Based", 10, preprocessing.pp_pen_based_df, preprocessing.pp_gs_pen_based_df)
+    cluster.plot_total_explained_variance()
+    cluster.plot_external_index(n_min=8, n_max=14, c_algorithm='kmeans', external_index='Purity')
     cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='kmeans')
     cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='birch')
 
     cluster = truncatedSVDTest.Cluster("Vowel", 11, preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df)
-    cluster.plot_total_explained_variance(plot=True)
+    cluster.plot_total_explained_variance()
     cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='kmeans')
     cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='birch')
 
     cluster = truncatedSVDTest.Cluster("Adult", 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df)
-    cluster.plot_total_explained_variance(plot=True)
+    cluster.plot_total_explained_variance()
     cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='kmeans')
     cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='birch')

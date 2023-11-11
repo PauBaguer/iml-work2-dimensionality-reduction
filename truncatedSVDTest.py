@@ -5,6 +5,8 @@ from sklearn.decomposition import TruncatedSVD
 from kmeans import kmeans
 from birch import birch
 from sklearn.metrics import davies_bouldin_score, silhouette_score
+from sklearn.metrics.cluster import adjusted_rand_score, normalized_mutual_info_score, homogeneity_score
+
 
 class Cluster:
     def __init__(self, dataset_name, k, data, gs):
@@ -13,7 +15,7 @@ class Cluster:
         self.data = data
         self.gs = gs
 
-    def plot_total_explained_variance(self, plot=False):
+    def plot_total_explained_variance(self):
         vars = []
         num_attributes = self.data.shape[1]
         num_components = list(range(2, num_attributes))
@@ -24,18 +26,16 @@ class Cluster:
             var = svd.explained_variance_ratio_.sum()
             vars.append(var)
         algorithm = 'Truncated SVD'
-        if plot:
-            fig = plt.figure()
-            plt.grid()
-            plt.plot(num_components, vars, marker='x')
-            plt.xlabel('Number of Components')
-            plt.ylabel('Total explained variance ratio')
-            plt.title(f'{algorithm} explained variance with {self.dataset_name} dataset')
-            # plt.show()
-            fig.savefig(f"figures/truncatedSVD/{self.dataset_name}-variance.png")
+        fig = plt.figure()
+        plt.grid()
+        plt.plot(num_components, vars, marker='x')
+        plt.xlabel('Number of Components')
+        plt.ylabel('Total explained variance ratio')
+        plt.title(f'{algorithm} explained variance with {self.dataset_name} dataset')
+        # plt.show()
+        fig.savefig(f"figures/truncatedSVD/{self.dataset_name}-variance.png")
 
         return vars
-
 
     def plot_clustering(self, n_min=2, n_max=3, range_k=1, c_algorithm='kmeans'):
         n_clusters = []
@@ -91,6 +91,42 @@ class Cluster:
         ax2.set_ylabel('Davies-Bouldin')
         fig2.savefig(f"figures/truncatedSVD/{self.dataset_name}-kmeans-db.png")
         fig2.show()
+        return
+
+    def plot_external_index(self, n_min, n_max,  c_algorithm='kmeans', external_index='Purity'):
+        scores = []
+        num_components = list(range(n_min, n_max + 1))
+
+        for n in num_components:
+            transformed_dataset = TruncatedSVD(n_components=n).fit_transform(self.data)
+
+            labels = []
+            if c_algorithm == 'kmeans':
+                centroid, labels = kmeans(transformed_dataset, self.k, metric='l2', centroid_init='kmeans++')
+            elif c_algorithm == 'birch':
+                labels, brc = birch(transformed_dataset, 0.5, self.k)
+            else:
+                print('Invalid clustering algorithm')
+
+            score = None
+            if external_index == 'Purity':
+                score = homogeneity_score(self.gs, labels)
+            elif external_index == 'ARI':
+                score = adjusted_rand_score(self.gs, labels)
+            elif external_index == 'NMI':
+                score = normalized_mutual_info_score(self.gs, labels)
+            scores.append(score)
+
+        algorithm = 'Truncated SVD'
+        fig = plt.figure()
+        plt.grid()
+        plt.plot(num_components, scores, marker='x')
+        plt.xlabel('Number of Components')
+        plt.ylabel(f'{external_index}')
+        plt.title(f'{algorithm} external index results ({self.dataset_name} dataset, K={self.k})')
+        # plt.show()
+        fig.savefig(f"figures/truncatedSVD/{self.dataset_name}-{external_index}.png")
+
         return
 
 
