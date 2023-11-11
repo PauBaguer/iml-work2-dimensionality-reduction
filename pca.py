@@ -12,7 +12,7 @@ class Pca:
         self.k_eigenvectors_matrix = self.k_eigenvalues()
         self.data_adjust = self.comp_data_adjust()
         self.rotated_values = self.rotate_space()
-
+        print()
 
     def d_dimensional_mean_vector(self):
         return self.original_values.mean(axis=0)
@@ -41,8 +41,8 @@ class Pca:
     def comp_eigenvectors(self):
         eigenvalues, eigenvectors = np.linalg.eig(self.covariance_matrix)
 
-        eigenvectors = np.array([x for _, x in sorted(zip(eigenvalues, eigenvectors), reverse=True)])
         eigenvalues = np.array([x for x in sorted(eigenvalues, reverse=True)])
+        eigenvectors = np.array([x for _, x in sorted(zip(eigenvalues, eigenvectors.T), reverse=False)]).T
         eigen_df = pd.DataFrame(
             {'Eigen values': eigenvalues, 'Eigen vectors': [str(v) for v in eigenvectors]})
         # eigen_df.sort_values('Eigen values', ascending=False, inplace=True)
@@ -55,10 +55,10 @@ class Pca:
         k_eigenvectors = self.eigenvectors[0:self.k]
         return k_eigenvectors.T
 
-
     def comp_data_adjust(self):
         data_adjust_T = np.array([col - self.mean_vector[i] for i, col in enumerate(self.original_values.T)])
         return data_adjust_T.T
+
     def rotate_space(self):
         transformed = np.matmul(self.k_eigenvectors_matrix.T, self.data_adjust.T)
         return transformed

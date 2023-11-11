@@ -167,6 +167,7 @@ if __name__ == '__main__':
 
     # TODO: select k for eigenvalues > 1
     # TODO: ASK TEACHER FOR DECIMAL PROBLEM
+    # TODO: add eigenvectors to plots, plot for datasets.
     # np.set_printoptions(threshold=sys.maxsize)
     # adult_pca = Pca(preprocessing.pp_adult_df, 'Adult', 5)
     # vowel_pca = Pca(preprocessing.pp_vowel_df, 'Vowel', 5)
@@ -206,9 +207,24 @@ if __name__ == '__main__':
 
     test_pca = Pca(test_arr2, 'test', 2)
 
-    print()
-    print("SKLEARN")
-    pca = PCA(n_components=2)
-    pca.fit(test_arr2)
-    print("Covariance matrix")
-    print(pca.get_covariance())
+    print(test_pca.rotated_values)
+
+    plt.scatter(test_pca.data_adjust.T[0, :], test_pca.data_adjust.T[1, :])
+    plt.xlim([-2, 2])
+    plt.ylim([-2, 2])
+    plt.title("Mean data adjust")
+    plt.show()
+
+    plt.scatter(test_pca.rotated_values[0,:],test_pca.rotated_values[1,:])
+    plt.xlim([-2, 2])
+    plt.ylim([-2, 2])
+    plt.title("Transformed data")
+    plt.show()
+
+    # print()
+    # print("SKLEARN")
+    # pca = PCA(n_components=2)
+    # pca.fit(test_arr2)
+    # print("Covariance matrix")
+    # print(pca.get_covariance())
+
