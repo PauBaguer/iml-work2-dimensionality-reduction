@@ -11,7 +11,7 @@ class Cluster:
         self.gs = gs
         
         if reduction_method == 'pca':
-            self.reduced = Pca(data, dataset_name, k)
+            self.reduced = Pca(data, dataset_name, k).rotated_values
         elif reduction_method == 'svd':
             self.reduced = TruncatedSVD(n_components=k, random_state=42).fit(data).transform(data)
         else:
