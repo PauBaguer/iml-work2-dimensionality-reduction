@@ -167,7 +167,6 @@ if __name__ == '__main__':
 
     # TODO: ASK TEACHER FOR DECIMAL PROBLEM
     # TODO: add eigenvectors to plots, plot for datasets.
-    # np.set_printoptions(threshold=sys.maxsize)
 
     # If k = -1, take only eigenvectors where eigenvalues are > 1.
     adult_pca = Pca(preprocessing.pp_adult_df, dataset_name='Adult', k=-1)
