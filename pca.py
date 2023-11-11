@@ -102,7 +102,7 @@ class Pca:
         ax[0][1].axhline(y=0, color='k')
         ax[0][1].axvline(x=0, color='k')
         # ax[0][1].axis('square')
-        ax[0][1].set_title(f"{self.dataset_name} Transformed data")
+        ax[0][1].set_title(f"{self.dataset_name} Transformed data w/ {len(self.k_eigenvectors_matrix.T)} dimensions")
 
         ax[1][0].scatter(self.reduced_data_adjust[:, 0], self.reduced_data_adjust[:, 1])
         ax[1][0].axhline(y=0, color='k')
