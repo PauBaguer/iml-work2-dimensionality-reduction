@@ -75,7 +75,7 @@ class Cluster:
                 if c_algorithm == 'kmeans':
                     centroid, labels = kmeans(self.transformed_dataset, k, metric='l2', centroid_init='kmeans++')
                 elif c_algorithm == 'birch':
-                    labels, brc = birch(self.transformed_dataset, 0.5, k)
+                    labels, brc = birch(self.transformed_dataset, threshold=0.5, n_clusters=k)
                 else:
                     print('Invalid clustering algorithm')
 

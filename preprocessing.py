@@ -115,7 +115,7 @@ class Preprocessing:
         categorical_transformer = Pipeline(steps=[
             ("imputer", SimpleImputer(strategy="most_frequent")), # fill missing values with most frequent
             ("encoder", pre.OneHotEncoder()),
-            # ("scaler", StandardScaler(with_mean=False)),
+            ("scaler", StandardScaler(with_mean=False)),
             # ("min-max-scaler", MinMaxScaler())
         ])
 

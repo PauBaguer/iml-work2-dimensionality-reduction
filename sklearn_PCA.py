@@ -28,7 +28,7 @@ class SklearnAlgorithms:
         var = sum(al.explained_variance_ratio_)
         cov_matrix = al.get_covariance()
         if plot:
-            plt.figure(figsize=(6, 4))
+            plt.figure(figsize=(5, 4))
             plt.scatter(reduced_data[:, 0], reduced_data[:, 1])
             plt.axhline(y=0, color='k')
             plt.axvline(x=0, color='k')
