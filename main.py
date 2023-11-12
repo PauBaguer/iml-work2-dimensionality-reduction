@@ -9,6 +9,11 @@ from preprocessing import Preprocessing
 from sklearn.decomposition import PCA
 from pca import Pca
 import birch, kmeans
+
+from ClusterRD import Cluster
+
+import truncatedSVDTest
+
 from sklearn.feature_selection import SelectKBest, SelectPercentile, f_classif, chi2, mutual_info_classif
 
 def load_arff(f_name):
@@ -170,31 +175,48 @@ if __name__ == '__main__':
 
 
     # If k = -1, take only eigenvectors where eigenvalues are > 1.
-    adult_pca = Pca(preprocessing.pp_adult_df, dataset_name='Adult', k=-1)
-    vowel_pca = Pca(preprocessing.pp_vowel_df, dataset_name='Vowel', k=-1)
-    pen_based_pca = Pca(preprocessing.pp_pen_based_df, dataset_name='Pen based', k=-1)
+    # adult_pca = Pca(preprocessing.pp_adult_df, dataset_name='Adult', k=-1)
+    # vowel_pca = Pca(preprocessing.pp_vowel_df, dataset_name='Vowel', k=-1)
+    # pen_based_pca = Pca(preprocessing.pp_pen_based_df, dataset_name='Pen based', k=-1)
 
 
-    test_arr2 = np.array([
-        [2.5,2.4],
-        [0.5,0.7],
-        [2.2,2.9],
-        [1.9,2.2],
-        [3.1,3.0],
-        [2.3,2.7],
-        [2.0,1.6],
-        [1.0,1.1],
-        [1.5,1.6],
-        [1.1,0.9]
-    ])
+    # test_arr2 = np.array([
+    #     [2.5,2.4],
+    #     [0.5,0.7],
+    #     [2.2,2.9],
+    #     [1.9,2.2],
+    #     [3.1,3.0],
+    #     [2.3,2.7],
+    #     [2.0,1.6],
+    #     [1.0,1.1],
+    #     [1.5,1.6],
+    #     [1.1,0.9]
+    # ])
 
-    print("mean:")
-    print(test_arr2.mean(axis=0))
-    print("var:")
-    print(test_arr2.var(axis=0))
+    # print("mean:")
+    # print(test_arr2.mean(axis=0))
+    # print("var:")
+    # print(test_arr2.var(axis=0))
 
-    # If k = -1, take only eigenvectors where eigenvalues are > 1.
-    test_pca = Pca(test_arr2, dataset_name='test', k=-1)
+    # # If k = -1, take only eigenvectors where eigenvalues are > 1.
+    # test_pca = Pca(test_arr2, dataset_name='test', k=-1)
+
+
+    # print()
+    # print("SKLEARN")
+    # pca = PCA(n_components=2)
+    # pca.fit(test_arr2)
+    
+    # print("Covariance matrix")
+    # print(pca.get_covariance())
+    
+    # labels_adult_svd_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('birch', 2)
+    # labels_adult_svd_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('kmeans', 2)
+    
+    # labels_adult_pca_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('birch', 2)
+    # labels_adult_pca_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('kmeans', 2)
+   
+    
 
 
     # print()
@@ -204,3 +226,42 @@ if __name__ == '__main__':
     # print("Covariance matrix")
     # print(pca.get_covariance())
 
+    #####################################
+    #             Truncated SVD         #
+    #####################################
+    cluster = truncatedSVDTest.Cluster("Pen-Based", 10, preprocessing.pp_pen_based_df, preprocessing.pp_gs_pen_based_df, 'truncatedSVD')
+    cluster.plot_total_explained_variance()
+    cluster.plot_external_index(n_min=8, n_max=14, c_algorithm='kmeans', external_index='Purity')
+    cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='birch')
+
+    cluster = truncatedSVDTest.Cluster("Vowel", 11, preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df, 'truncatedSVD')
+    cluster.plot_total_explained_variance()
+    cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='birch')
+
+    cluster = truncatedSVDTest.Cluster("Adult", 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'truncatedSVD')
+    cluster.plot_total_explained_variance()
+    cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='birch')
+    
+    #####################################
+    #          Own PCA                  #
+    #####################################
+    
+    cluster = truncatedSVDTest.Cluster("Pen-Based", 10, preprocessing.pp_pen_based_df, preprocessing.pp_gs_pen_based_df, 'PCA')
+    cluster.plot_total_explained_variance()
+    cluster.plot_external_index(n_min=8, n_max=14, c_algorithm='kmeans', external_index='Purity')
+    cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='birch')
+    
+    cluster = truncatedSVDTest.Cluster("Vowel", 11, preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df, 'PCA')
+    cluster.plot_total_explained_variance()
+    cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='birch')
+    
+    cluster = truncatedSVDTest.Cluster("Adult", 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'PCA')
+    cluster.plot_total_explained_variance()
+    cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='birch')
+    
