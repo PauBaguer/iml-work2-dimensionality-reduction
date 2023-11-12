@@ -216,19 +216,43 @@ if __name__ == '__main__':
     # #####################################
     cluster = reduceDimensionality.Cluster("Pen-Based", 10, preprocessing.pp_pen_based_df, preprocessing.pp_gs_pen_based_df, 'truncatedSVD')
     cluster.plot_total_explained_variance()
-    cluster.plot_external_index(n_min=8, n_max=14, c_algorithm='kmeans', external_index='Purity')
-    cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='kmeans')
-    cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='birch')
+    n1 = 7
+    n2 = 15
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='Purity')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='ARI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='NMI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='Purity')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='ARI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='NMI')
+    cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='birch')
 
-    # cluster = reduceDimensionality.Cluster("Vowel", 11, preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df, 'truncatedSVD')
-    # cluster.plot_total_explained_variance()
-    # cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='kmeans')
-    # cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='birch')
+    cluster = reduceDimensionality.Cluster("Vowel", 11, preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df, 'truncatedSVD')
+    cluster.plot_total_explained_variance()
+    n1 = 10
+    n2 = 24
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='Purity')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='ARI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='NMI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='Purity')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='ARI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='NMI')
+    cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='birch')
 
     cluster = reduceDimensionality.Cluster("Adult", 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'truncatedSVD')
     cluster.plot_total_explained_variance()
-    cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='kmeans')
-    cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='birch')
+    n1 = 30
+    n2 = 45
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='Purity')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='ARI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='NMI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='Purity')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='ARI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='NMI')
+    cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='birch')
+
 
     #####################################
     #               Own PCA             #
@@ -236,17 +260,40 @@ if __name__ == '__main__':
 
     cluster = reduceDimensionality.Cluster("Pen-Based", 10, preprocessing.pp_pen_based_df, preprocessing.pp_gs_pen_based_df, 'PCA')
     cluster.plot_total_explained_variance()
-    cluster.plot_external_index(n_min=8, n_max=14, c_algorithm='kmeans', external_index='Purity')
-    cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='kmeans')
-    cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='birch')
+    n1 = 7
+    n2 = 15
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='Purity')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='ARI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='NMI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='Purity')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='ARI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='NMI')
+    cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='birch')
 
     cluster = reduceDimensionality.Cluster("Vowel", 11, preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df, 'PCA')
     cluster.plot_total_explained_variance()
-    cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='kmeans')
-    cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='birch')
+    n1 = 10
+    n2 = 25
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='Purity')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='ARI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='NMI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='Purity')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='ARI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='NMI')
+    cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='birch')
 
     cluster = reduceDimensionality.Cluster("Adult", 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'PCA')
     cluster.plot_total_explained_variance()
-    cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='kmeans')
-    cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='birch')
+    n1 = 30
+    n2 = 45
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='Purity')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='ARI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='kmeans', external_index='NMI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='Purity')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='ARI')
+    cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='NMI')
+    cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='kmeans')
+    cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='birch')
 
