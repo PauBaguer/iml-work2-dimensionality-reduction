@@ -20,7 +20,7 @@ class Pca:
         self.reduced_original_values = self.return_original_values()
         # self.plots()
         end = time.time()
-        print(f"PCA execution elapsed: {end - start}s")
+        print(f"{dataset_name} PCA execution elapsed: {end - start:.2f}s")
         print()
 
     def d_dimensional_mean_vector(self):
