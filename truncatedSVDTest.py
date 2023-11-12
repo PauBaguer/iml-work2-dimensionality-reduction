@@ -18,6 +18,7 @@ class Cluster:
         self.reduction_method = reduction_method
         if self.reduction_method == 'PCA':
             self.transformed_dataset = Pca(self.data, self.dataset_name, min(self.data.shape)).reduced_original_values
+            print()
         elif self.reduction_method == 'truncatedSVD':
             self.transformed_dataset = TruncatedSVD(n_components=min(self.data.shape)-1).fit_transform(self.data)
 
@@ -97,17 +98,17 @@ class Cluster:
             ax2.plot(results_df["n_components"], results_df["DB_" + str(k)], color=cmap(k-k_min), label="K=" + str(k))
 
         ax.legend()
-        ax.set_title(f"K-Means Silhouette, {self.dataset_name} dataset")
+        ax.set_title(f"{c_algorithm} Silhouette, {self.dataset_name} dataset")
         ax.set_xlabel('Number of components')
         ax.set_ylabel('Silhouette')
-        fig.savefig("figures/"+self.reduction_method+'/'+self.dataset_name+'-kmeans-silhouette.png')
+        fig.savefig(f"figures/{self.reduction_method}/{self.dataset_name}-{c_algorithm}-silhouette.png")
         fig.show()
 
         ax2.legend()
-        ax2.set_title(f"K-Means Davies-Bouldin, {self.dataset_name} dataset")
+        ax2.set_title(f"{c_algorithm} Davies-Bouldin, {self.dataset_name} dataset")
         ax2.set_xlabel('Number of components')
         ax2.set_ylabel('Davies-Bouldin')
-        fig2.savefig("figures/"+self.reduction_method+'/'+self.dataset_name+'-kmeans-db.png')
+        fig2.savefig(f"figures/{self.reduction_method}/{self.dataset_name}-{c_algorithm}-db.png")
         fig2.show()
         return
 
