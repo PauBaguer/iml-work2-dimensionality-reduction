@@ -168,6 +168,7 @@ if __name__ == '__main__':
     # TODO: ASK TEACHER FOR DECIMAL PROBLEM
     # TODO: add eigenvectors to plots, plot for datasets.
 
+
     # If k = -1, take only eigenvectors where eigenvalues are > 1.
     adult_pca = Pca(preprocessing.pp_adult_df, dataset_name='Adult', k=-1)
     vowel_pca = Pca(preprocessing.pp_vowel_df, dataset_name='Vowel', k=-1)

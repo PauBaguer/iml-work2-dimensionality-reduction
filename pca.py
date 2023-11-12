@@ -7,6 +7,7 @@ class Pca:
         self.dataset_name = dataset_name
         self.k = k # The K largest eigenvalues will be selected. If K=-1, eigenvalues > 1 will be selected
         self.shape = self.original_values.shape
+
         self.mean_vector = self.d_dimensional_mean_vector()
         self.covariance_matrix = self.comp_covariance_matrix()
         self.eigenvalues, self.eigenvectors = self.comp_eigenvectors()
