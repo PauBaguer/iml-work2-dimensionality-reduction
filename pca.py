@@ -1,8 +1,10 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import time
 class Pca:
     def __init__(self, original, dataset_name, k):
+        start = time.time()
         self.original_values = original
         self.dataset_name = dataset_name
         self.k = k # The K largest eigenvalues will be selected. If K=-1, eigenvalues > 1 will be selected
@@ -17,6 +19,8 @@ class Pca:
         self.reduced_data_adjust = self.rotate_back_space()
         self.reduced_original_values = self.return_original_values()
         # self.plots()
+        end = time.time()
+        print(f"PCA execution elapsed: {end - start}s")
         print()
 
     def d_dimensional_mean_vector(self):

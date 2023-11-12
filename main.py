@@ -170,14 +170,10 @@ if __name__ == '__main__':
     #                PCA                #
     #####################################
 
-    # TODO: ASK TEACHER FOR DECIMAL PROBLEM
-    # TODO: add eigenvectors to plots, plot for datasets.
-
-
     # If k = -1, take only eigenvectors where eigenvalues are > 1.
-    # adult_pca = Pca(preprocessing.pp_adult_df, dataset_name='Adult', k=-1)
-    # vowel_pca = Pca(preprocessing.pp_vowel_df, dataset_name='Vowel', k=-1)
-    # pen_based_pca = Pca(preprocessing.pp_pen_based_df, dataset_name='Pen based', k=-1)
+    adult_pca = Pca(preprocessing.pp_adult_df, dataset_name='Adult', k=-1)
+    vowel_pca = Pca(preprocessing.pp_vowel_df, dataset_name='Vowel', k=-1)
+    pen_based_pca = Pca(preprocessing.pp_pen_based_df, dataset_name='Pen based', k=-1)
 
 
     # test_arr2 = np.array([
@@ -200,21 +196,12 @@ if __name__ == '__main__':
 
     # # If k = -1, take only eigenvectors where eigenvalues are > 1.
     # test_pca = Pca(test_arr2, dataset_name='test', k=-1)
-
-
-    # print()
-    # print("SKLEARN")
-    # pca = PCA(n_components=2)
-    # pca.fit(test_arr2)
     
-    # print("Covariance matrix")
-    # print(pca.get_covariance())
+    labels_adult_svd_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('birch', 2)
+    labels_adult_svd_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('kmeans', 2)
     
-    # labels_adult_svd_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('birch', 2)
-    # labels_adult_svd_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('kmeans', 2)
-    
-    # labels_adult_pca_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('birch', 2)
-    # labels_adult_pca_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('kmeans', 2)
+    labels_adult_pca_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('birch', 2)
+    labels_adult_pca_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('kmeans', 2)
    
     
 
