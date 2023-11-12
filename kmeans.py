@@ -107,7 +107,7 @@ def kmeans(data, num_clusters, max_iter=5000, metric='l2', centroid_init='kmeans
         distance = [metric_function(row, centroids)]
         index = np.argmin(distance)
         assigned_cluster.append(index)
-    return assigned_cluster, centroids
+    return  centroids, assigned_cluster
 
 def plot_kmeans_graphs(df, dataset_name, real_k, range_k=4):
     n_clusters = []
