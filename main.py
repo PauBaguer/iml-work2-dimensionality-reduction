@@ -197,11 +197,11 @@ if __name__ == '__main__':
     # # If k = -1, take only eigenvectors where eigenvalues are > 1.
     # test_pca = Pca(test_arr2, dataset_name='test', k=-1)
     
-    labels_adult_svd_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('birch', 2)
-    labels_adult_svd_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('kmeans', 2)
-
-    labels_adult_pca_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('birch', 2)
-    labels_adult_pca_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('kmeans', 2)
+    # labels_adult_svd_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('birch', 2)
+    # labels_adult_svd_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('kmeans', 2)
+    #
+    # labels_adult_pca_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('birch', 2)
+    # labels_adult_pca_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('kmeans', 2)
     #
     #
     #
