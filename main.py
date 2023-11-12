@@ -9,7 +9,11 @@ from preprocessing import Preprocessing
 from sklearn.decomposition import PCA
 from pca import Pca
 import birch, kmeans
+
+from ClusterRD import Cluster
+
 import truncatedSVDTest
+
 from sklearn.feature_selection import SelectKBest, SelectPercentile, f_classif, chi2, mutual_info_classif
 
 def load_arff(f_name):
@@ -197,6 +201,23 @@ if __name__ == '__main__':
     test_pca = Pca(test_arr2, dataset_name='test', k=-1)
 
 
+    print()
+    print("SKLEARN")
+    pca = PCA(n_components=2)
+    pca.fit(test_arr2)
+    
+    print("Covariance matrix")
+    print(pca.get_covariance())
+    
+    labels_adult_svd_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('birch', 2)
+    labels_adult_svd_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'svd').clustering('kmeans', 2)
+    
+    labels_adult_pca_birch,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('birch', 2)
+    labels_adult_pca_kmeans,_ = Cluster('adult', 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'pca').clustering('kmeans', 2)
+   
+    
+
+
     # print()
     # print("SKLEARN")
     # pca = PCA(n_components=2)
@@ -222,3 +243,4 @@ if __name__ == '__main__':
     cluster.plot_total_explained_variance()
     cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='kmeans')
     cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='birch')
+
