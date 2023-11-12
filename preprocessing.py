@@ -122,7 +122,7 @@ class Preprocessing:
         numeric_transformer = Pipeline(steps=[
             ("imputer", SimpleImputer(strategy="median")), # fill missing values with the median
             ("scaler", StandardScaler()),
-            ("min-max-scaler", MinMaxScaler())
+            #  ("min-max-scaler", MinMaxScaler())
         ])
 
         preprocessor = ColumnTransformer(sparse_threshold=0, transformers=[
