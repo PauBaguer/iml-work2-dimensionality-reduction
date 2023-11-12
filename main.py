@@ -10,7 +10,7 @@ from sklearn.decomposition import PCA
 from pca import Pca
 import birch, kmeans
 
-import truncatedSVDTest
+import reduceDimensionality
 
 from sklearn.feature_selection import SelectKBest, SelectPercentile, f_classif, chi2, mutual_info_classif
 
@@ -214,18 +214,18 @@ if __name__ == '__main__':
     # #####################################
     # #             Truncated SVD         #
     # #####################################
-    cluster = truncatedSVDTest.Cluster("Pen-Based", 10, preprocessing.pp_pen_based_df, preprocessing.pp_gs_pen_based_df, 'truncatedSVD')
+    cluster = reduceDimensionality.Cluster("Pen-Based", 10, preprocessing.pp_pen_based_df, preprocessing.pp_gs_pen_based_df, 'truncatedSVD')
     cluster.plot_total_explained_variance()
     cluster.plot_external_index(n_min=8, n_max=14, c_algorithm='kmeans', external_index='Purity')
     cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='kmeans')
     cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='birch')
 
-    # cluster = truncatedSVDTest.Cluster("Vowel", 11, preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df, 'truncatedSVD')
+    # cluster = reduceDimensionality.Cluster("Vowel", 11, preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df, 'truncatedSVD')
     # cluster.plot_total_explained_variance()
     # cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='kmeans')
     # cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='birch')
 
-    cluster = truncatedSVDTest.Cluster("Adult", 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'truncatedSVD')
+    cluster = reduceDimensionality.Cluster("Adult", 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'truncatedSVD')
     cluster.plot_total_explained_variance()
     cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='kmeans')
     cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='birch')
@@ -234,18 +234,18 @@ if __name__ == '__main__':
     #               Own PCA             #
     #####################################
 
-    cluster = truncatedSVDTest.Cluster("Pen-Based", 10, preprocessing.pp_pen_based_df, preprocessing.pp_gs_pen_based_df, 'PCA')
+    cluster = reduceDimensionality.Cluster("Pen-Based", 10, preprocessing.pp_pen_based_df, preprocessing.pp_gs_pen_based_df, 'PCA')
     cluster.plot_total_explained_variance()
     cluster.plot_external_index(n_min=8, n_max=14, c_algorithm='kmeans', external_index='Purity')
     cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='kmeans')
     cluster.plot_clustering(n_min=8, n_max=14, range_k=1, c_algorithm='birch')
 
-    cluster = truncatedSVDTest.Cluster("Vowel", 11, preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df, 'PCA')
+    cluster = reduceDimensionality.Cluster("Vowel", 11, preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df, 'PCA')
     cluster.plot_total_explained_variance()
     cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='kmeans')
     cluster.plot_clustering(n_min=10, n_max=20, range_k=1, c_algorithm='birch')
 
-    cluster = truncatedSVDTest.Cluster("Adult", 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'PCA')
+    cluster = reduceDimensionality.Cluster("Adult", 2, preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, 'PCA')
     cluster.plot_total_explained_variance()
     cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='kmeans')
     cluster.plot_clustering(n_min=30, n_max=40, range_k=1, c_algorithm='birch')
