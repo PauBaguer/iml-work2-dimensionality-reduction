@@ -18,7 +18,7 @@ class Pca:
         self.rotated_values = self.rotate_space()
         self.reduced_data_adjust = self.rotate_back_space()
         self.reduced_original_values = self.return_original_values()
-        # self.plots()
+        self.plots()
         end = time.time()
         print(f"{dataset_name} PCA execution elapsed: {end - start:.2f}s")
         print()
@@ -41,10 +41,10 @@ class Pca:
                 co_var = self.covariance(self.original_values[:, row_idx], self.mean_vector[row_idx], self.original_values[:, col_idx], self.mean_vector[col_idx])
                 c_matrix.itemset((row_idx, col_idx), co_var)
 
-        # print()
-        # print(f"== {self.dataset_name} COVARIANCE MATRIX ==")
-        # print(c_matrix)
-        # print()
+        print()
+        print(f"== {self.dataset_name} COVARIANCE MATRIX ==")
+        print(c_matrix)
+        print()
         return c_matrix
 
     def comp_eigenvectors(self):
@@ -57,7 +57,7 @@ class Pca:
         # eigen_df.sort_values('Eigen values', ascending=False, inplace=True)
 
         pd.set_option('display.max_colwidth', 10000)
-        # print(eigen_df)
+        print(eigen_df)
         return eigenvalues, eigenvectors
 
     def k_eigenvalues(self):
