@@ -29,6 +29,8 @@ class Visualization:
         for label in labels:
             plt.figure(figsize=(8, 6))
             plt.scatter(pca[:, 0], pca[:, 1], c=label, cmap='tab20', s=20)
+            plt.xlabel('Principal component 1')
+            plt.ylabel('Principal component 2')
             plt.title(f'PCA with {titles[i]} in {dataset}')
             plt.savefig(f'figures/visualization/pca_{dataset}_{i}.png')
             plt.close()
@@ -45,6 +47,8 @@ class Visualization:
             plt.figure(figsize=(8, 6))
             plt.scatter(isomap[:, 0], isomap[:, 1], c=label, cmap='tab20', s=20)
             plt.title(f'ISOMAP with {titles[i]} in {dataset}')
+            plt.xlabel('Dimension 1')
+            plt.ylabel('Dimension 2')
             plt.savefig(f'figures/visualization/isomap_{dataset}_{i}.png')
             plt.close()
             # plt.show()
