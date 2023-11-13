@@ -250,7 +250,6 @@ if __name__ == '__main__':
     results_pca_adult = sk_adult.func_sklearn(0, thresh_adult, True, 'Adult')
     end_time = time.time()
     print(f"PCA time Adult: {end_time - start_time} seconds")
-    scree_plot(results_pca_adult[4], dataset='Adult', algorithm='PCA')
 
     # pen-based
     variances_pca_pen, thresh_pen = sk_pen.explore_ncomponents(n_components_pen, True, 'Pen-based')
@@ -258,7 +257,6 @@ if __name__ == '__main__':
     results_pca_pen = sk_pen.func_sklearn(0, thresh_pen, True, 'Pen-based')  # CHANGE n_components
     end_time = time.time()
     print(f"PCA time Pen-based: {end_time - start_time} seconds")
-    scree_plot(results_pca_pen[4], dataset='Pen-based', algorithm='PCA')
 
     # vowel
     variances_pca_vowel, thresh_vowel = sk_vowel.explore_ncomponents(n_components_vowel, True, 'Vowel')
@@ -266,7 +264,6 @@ if __name__ == '__main__':
     results_pca_vowel = sk_vowel.func_sklearn(0, thresh_vowel, True, 'Vowel')
     end_time = time.time()
     print(f"PCA time Vowel: {end_time - start_time} seconds")
-    scree_plot(results_pca_vowel[4], dataset='Vowel', algorithm='PCA')
 
     # # 1.2. IPCA
 
@@ -276,7 +273,6 @@ if __name__ == '__main__':
     results_ipca_adult = sk_adult.func_sklearn(1, 23, True, 'Adult')
     end_time = time.time()
     print(f"IPCA time Adult: {end_time - start_time} seconds")
-    scree_plot(results_ipca_adult[4], dataset='Adult', algorithm='IPCA')
 
     # pen-based
     variances_ipca_pen = sk_pen.explore_ncomponents(n_components_pen, True, 'Pen-based', 1)
@@ -284,7 +280,6 @@ if __name__ == '__main__':
     results_ipca_pen = sk_pen.func_sklearn(1, 8, True, 'Pen-based')
     end_time = time.time()
     print(f"IPCA time Pen-based: {end_time - start_time} seconds")
-    scree_plot(results_ipca_pen[4], dataset='Pen-based', algorithm='IPCA')
 
     # vowel
     variances_ipca_vowel = sk_vowel.explore_ncomponents(n_components_vowel, True, 'Vowel', 1)  # CHANGE n_components
@@ -292,7 +287,6 @@ if __name__ == '__main__':
     results_ipca_vowel = sk_vowel.func_sklearn(1, 10, True, 'Vowel')
     end_time = time.time()
     print(f"IPCA time Vowel: {end_time - start_time} seconds")
-    scree_plot(results_ipca_vowel[4], dataset='Vowel', algorithm='IPCA')
 
 
     # #####################################
