@@ -13,21 +13,23 @@ result of the k-Means and BIRCH algorithms with the dimensionality reduction.
 
 class Visualization:
 
-    def __init__(self, df, labels_gt, labels_birch_or, labels_kmeans_or):
+    def __init__(self, df, labels_gt, labels_birch_or, labels_kmeans_or, labels_birch_red_pca, labels_kmeans_pca):
         self.df = df
         self.labels_gt = labels_gt
         self.labels_birch_or = labels_birch_or
         self.labels_kmeans_or = labels_kmeans_or
-        # self.labels_birch_pca = labels_birch_red_pca
-        # self.labels_kmeans_pca = labels_kmeans_pca
+        self.labels_birch_pca = labels_birch_red_pca
+        self.labels_kmeans_pca = labels_kmeans_pca
 
     def func_pca(self, dataset, n_components=2):
         al = PCA(n_components=n_components)
         pca = al.fit_transform(self.df)
-        labels = [self.labels_gt, self.labels_birch_or, self.labels_kmeans_or]
+        labels = [self.labels_gt, self.labels_birch_or, self.labels_kmeans_or, self.labels_birch_pca,
+                  self.labels_kmeans_pca]
         i = 0
         # titles = ['Ground Truth', 'Clustering BIRCH w/o dim. reduction', 'Clustering K-Means w/o dim. reduction']
-        titles = ['Ground Truth', 'Clustering BIRCH w/ PCA', 'Clustering K-Means w/ PCA']
+        titles = ['Ground Truth', 'Clustering BIRCH w/o dim. reduction', 'Clustering K-Means w/o dim. reduction',
+                  'Clustering BIRCH w/ PCA', 'Clustering K-Means w/ PCA']
         for label in labels:
             plt.figure(figsize=(8, 6))
             plt.scatter(pca[:, 0], pca[:, 1], c=label, cmap='tab20', s=20)
@@ -42,10 +44,10 @@ class Visualization:
     def func_isomap(self, dataset, n_neighbors=100, n_components=2):
         iso = Isomap(n_neighbors=n_neighbors, n_components=n_components)
         isomap = iso.fit_transform(self.df)
-        labels = [self.labels_gt, self.labels_birch_or, self.labels_kmeans_or]
-        # titles = ['Ground Truth', 'Clustering BIRCH w/o dim. reduction', 'Clustering K-Means w/o dim. reduction',
-        # 'Clustering BIRCH w/ PCA', 'Clustering K-Means w/ PCA']
-        titles = ['Ground Truth', 'Clustering BIRCH w/ PCA', 'Clustering K-Means w/ PCA']
+        labels = [self.labels_gt, self.labels_birch_or, self.labels_kmeans_or, self.labels_birch_pca,
+                  self.labels_kmeans_pca]
+        titles = ['Ground Truth', 'Clustering BIRCH w/o dim. reduction', 'Clustering K-Means w/o dim. reduction',
+                  'Clustering BIRCH w/ PCA', 'Clustering K-Means w/ PCA']
         i = 0
         for label in labels:
             plt.figure(figsize=(8, 6))
@@ -65,9 +67,10 @@ class Visualization:
         isomap = Isomap(n_neighbors=n_neighbors, n_components=n_components)
         transformed_sample = isomap.fit_transform(sample_data) # we fit ISOMAP on the sample data
         transformed_full_dataset = isomap.transform(self.df)  # apply the learned transformation to the entire dataset
-        labels = [self.labels_gt, self.labels_birch_or, self.labels_kmeans_or]
-        # titles = ['Ground Truth', 'Clustering BIRCH w/o dim. reduction', 'Clustering K-Means w/o dim. reduction']
-        titles = ['Ground Truth', 'Clustering BIRCH w/ PCA', 'Clustering K-Means w/ PCA']
+        labels = [self.labels_gt, self.labels_birch_or, self.labels_kmeans_or, self.labels_birch_pca,
+                  self.labels_kmeans_pca]
+        titles = ['Ground Truth', 'Clustering BIRCH w/o dim. reduction', 'Clustering K-Means w/o dim. reduction',
+                  'Clustering BIRCH w/ PCA', 'Clustering K-Means w/ PCA']
         i = 0
         for label in labels:
             plt.figure(figsize=(8, 6))

@@ -380,15 +380,75 @@ if __name__ == '__main__':
     ############################
 
     # adult
+    start_time_b = time.time()
     adult_birch_labels, adult_birch = birch.birch(preprocessing.pp_adult_df, 2, 0.5)
-    # end_time_b = time.time()
-    # print(f"Training time Adult Birch: {end_time_b - start_time_b} seconds")
-    # start_time_k = time.time()
+    end_time_b = time.time()
+    print(f"Training time Adult Birch: {end_time_b - start_time_b} seconds")
+    start_time_k = time.time()
     centroid_adult, adult_kmeans_labels = kmeans.kmeans(preprocessing.pp_adult_df, 2)
-    # end_time_k = time.time()
-    # print(f"Training time Adult Kmeans: {end_time_k - start_time_k} seconds")
+    end_time_k = time.time()
+    print(f"Training time Adult Kmeans: {end_time_k - start_time_k} seconds")
+
+    transformed_dataset_adult = Pca(preprocessing.pp_adult_df, "Adult", 80).reduced_original_values
+    start_time_b = time.time()
+    adult_birch_labels_PCA, _ = birch.birch(transformed_dataset_adult, 2, 0.5)
+    end_time_b = time.time()
+    print(f"Training time Adult Birch: {end_time_b - start_time_b} seconds")
+    start_time_k = time.time()
+    _, adult_kmeans_labels_PCA = kmeans.kmeans(transformed_dataset_adult, 2)
+    end_time_k = time.time()
+    print(f"Training time Adult Kmeans: {end_time_k - start_time_k} seconds")
     vis_adult = Visualization(preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, adult_birch_labels,
-                              adult_kmeans_labels)
-    # vis_adult.func_pca(dataset='Adult', n_components=2)
-    vis_adult.func_isomap(dataset='Adult', n_neighbors=200, n_components=2)
+                              adult_kmeans_labels, adult_birch_labels_PCA, adult_kmeans_labels_PCA)
+    vis_adult.func_pca(dataset='Adult', n_components=2)
+    vis_adult.func_isomap_subsample(dataset='Adult')
+
+    # pen-based
+    start_time_b = time.time()
+    pen_birch_labels, pen_birch = birch.birch(preprocessing.pp_pen_based_df, 10, 0.5)
+    end_time_b = time.time()
+    print(f"Training time Pen Birch: {end_time_b - start_time_b} seconds")
+    start_time_k = time.time()
+    centroid_pen, pen_kmeans_labels = kmeans.kmeans(preprocessing.pp_pen_based_df, 10)
+    end_time_k = time.time()
+    print(f"Training time Pen Kmeans: {end_time_k - start_time_k} seconds")
+
+    transformed_dataset_pen = Pca(preprocessing.pp_pen_based_df, "Pen-Based", 7).reduced_original_values
+    start_time_b = time.time()
+    pen_birch_labels_PCA, _ = birch.birch(transformed_dataset_pen, 10, 0.5)
+    end_time_b = time.time()
+    print(f"Training time Pen Birch: {end_time_b - start_time_b} seconds")
+    start_time_k = time.time()
+    _, pen_kmeans_labels_PCA = kmeans.kmeans(transformed_dataset_pen, 10)
+    vis_pen = Visualization(preprocessing.pp_pen_based_df, preprocessing.pp_gs_pen_based_df, pen_birch_labels,
+                            pen_kmeans_labels, pen_birch_labels_PCA, pen_kmeans_labels_PCA)
+    end_time_k = time.time()
+    print(f"Training time Pen Kmeans: {end_time_k - start_time_k} seconds")
+    vis_pen.func_pca(dataset='Pen-based', n_components=2)
+    vis_pen.func_isomap(dataset='Pen-based', n_components=2)
+    # vis_pen.func_isomap_subsample(dataset='Pen-based', n_neighbors=100, sample_size=5000, n_components=2)
+
+    # vowel
+    start_time_b = time.time()
+    vowel_birch_labels, vowel_birch = birch.birch(preprocessing.pp_vowel_df, 11, 0.5)
+    end_time_b = time.time()
+    print(f"Training time Adult Birch: {end_time_b - start_time_b} seconds")
+    start_time_k = time.time()
+    centroid_vowel, vowel_kmeans_labels = kmeans.kmeans(preprocessing.pp_vowel_df, 11)
+    end_time_k = time.time()
+    print(f"Training time Adult Kmeans: {end_time_k - start_time_k} seconds")
+
+    transformed_dataset_vowel = Pca(preprocessing.pp_vowel_df, "Vowel", 15).reduced_original_values
+    start_time_b = time.time()
+    vowel_birch_labels_PCA, _ = birch.birch(transformed_dataset_vowel, 11, 0.5)
+    end_time_b = time.time()
+    print(f"Training time Vowel Birch: {end_time_b - start_time_b} seconds")
+    start_time_k = time.time()
+    _, vowel_kmeans_labels_PCA = kmeans.kmeans(transformed_dataset_vowel, 11)
+    end_time_k = time.time()
+    print(f"Training time Vowel Kmeans: {end_time_k - start_time_k} seconds")
+    vis_vowel = Visualization(preprocessing.pp_vowel_df, preprocessing.pp_gs_vowel_df, vowel_birch_labels,
+                              vowel_birch_labels_PCA,vowel_kmeans_labels, vowel_kmeans_labels_PCA)
+    vis_vowel.func_pca(dataset='Vowel', n_components=2)
+    vis_vowel.func_isomap(dataset='Vowel', n_neighbors=100, n_components=2)
 
