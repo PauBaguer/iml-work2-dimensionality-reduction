@@ -48,7 +48,7 @@ class Pca:
         return c_matrix
 
     def comp_eigenvectors(self):
-        eigenvalues, eigenvectors = np.linalg.eig(self.covariance_matrix)
+        eigenvalues, eigenvectors = np.linalg.eigh(self.covariance_matrix)
 
         eigenvalues = np.array([x for x in sorted(eigenvalues, reverse=True)])
         eigenvectors = np.array([x for _, x in sorted(zip(eigenvalues, eigenvectors.T), reverse=False)]).T

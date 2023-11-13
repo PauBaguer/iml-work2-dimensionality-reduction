@@ -174,6 +174,10 @@ if __name__ == '__main__':
     vowel_pca = Pca(preprocessing.pp_vowel_df, dataset_name='Vowel', k=-1)
     pen_based_pca = Pca(preprocessing.pp_pen_based_df, dataset_name='Pen based', k=-1)
 
+    im_eigenvector_adult = np.imag(adult_pca.eigenvectors)
+    im_eigenvector_vowel = np.imag(vowel_pca.eigenvectors)
+    im_eigenvector_pen_based = np.imag(pen_based_pca.eigenvectors)
+
 
     # test_arr2 = np.array([
     #     [2.5,2.4],
