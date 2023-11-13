@@ -36,7 +36,7 @@ class Visualization:
             plt.xlabel('Principal component 1')
             plt.ylabel('Principal component 2')
             plt.title(f'PCA with {titles[i]} in {dataset}')
-            plt.savefig(f'figures/visualization/pca_{dataset}_{i}_reduced.png')
+            plt.savefig(f'figures/visualization/pca_{dataset}_{i}.png')
             plt.close()
             # plt.show()
             i += 1
@@ -55,7 +55,7 @@ class Visualization:
             plt.title(f'ISOMAP with {titles[i]} in {dataset}')
             plt.xlabel('Dimension 1')
             plt.ylabel('Dimension 2')
-            plt.savefig(f'figures/visualization/isomap_{dataset}_{i}_reduced.png')
+            plt.savefig(f'figures/visualization/isomap_{dataset}_{i}.png')
             plt.close()
             # plt.show()
             i += 1
@@ -78,7 +78,7 @@ class Visualization:
             plt.title(f'ISOMAP with {titles[i]} in {dataset}')
             plt.xlabel('Dimension 1')
             plt.ylabel('Dimension 2')
-            plt.savefig(f'figures/visualization/isomap_subsampled_{dataset}_{i}_reduced.png')
+            plt.savefig(f'figures/visualization/isomap_subsampled_{dataset}_{i}.png')
             plt.close()
             # plt.show()
             i += 1
