@@ -9,6 +9,7 @@ from preprocessing import Preprocessing
 from sklearn.decomposition import PCA
 from pca import Pca
 import birch, kmeans
+from visualization import Visualization
 
 import reduceDimensionality
 
@@ -296,4 +297,21 @@ if __name__ == '__main__':
     cluster.plot_external_index(n_min=n1, n_max=n2, c_algorithm='birch', external_index='NMI')
     cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='kmeans')
     cluster.plot_clustering(n_min=n1, n_max=n2, range_k=1, c_algorithm='birch')
+
+    ############################
+    #      VISUALIZATION       #
+    ############################
+
+    # adult
+    adult_birch_labels, adult_birch = birch.birch(preprocessing.pp_adult_df, 2, 0.5)
+    # end_time_b = time.time()
+    # print(f"Training time Adult Birch: {end_time_b - start_time_b} seconds")
+    # start_time_k = time.time()
+    centroid_adult, adult_kmeans_labels = kmeans.kmeans(preprocessing.pp_adult_df, 2)
+    # end_time_k = time.time()
+    # print(f"Training time Adult Kmeans: {end_time_k - start_time_k} seconds")
+    vis_adult = Visualization(preprocessing.pp_adult_df, preprocessing.pp_gs_adult_df, adult_birch_labels,
+                              adult_kmeans_labels)
+    # vis_adult.func_pca(dataset='Adult', n_components=2)
+    vis_adult.func_isomap(dataset='Adult', n_neighbors=200, n_components=2)
 
