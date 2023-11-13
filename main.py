@@ -266,11 +266,11 @@ if __name__ == '__main__':
     start_time_b = time.time()
     vowel_birch_labels, vowel_birch = birch.birch(preprocessing.pp_vowel_df, 11, 0.5)
     end_time_b = time.time()
-    print(f"Training time Adult Birch: {end_time_b - start_time_b} seconds")
+    print(f"Training time Vowel Birch: {end_time_b - start_time_b} seconds")
     start_time_k = time.time()
     centroid_vowel, vowel_kmeans_labels = kmeans.kmeans(preprocessing.pp_vowel_df, 11)
     end_time_k = time.time()
-    print(f"Training time Adult Kmeans: {end_time_k - start_time_k} seconds")
+    print(f"Training time Vowel Kmeans: {end_time_k - start_time_k} seconds")
 
     transformed_dataset_vowel = Pca(preprocessing.pp_vowel_df, "Vowel", 15).reduced_original_values
     start_time_b = time.time()
