@@ -42,10 +42,12 @@ class SklearnAlgorithms:
     def explore_ncomponents(self, n_components, plot=False, dataset=None, algorithm=0):
         vars = []
         control = True
+        thresh = 0
         for component in n_components:
             al, components, var, cov_matrix, explained_variances,  reduced_data = self.func_sklearn(algorithm, component)
             vars.append(var)
             if var > 0.90 and control:
+                thresh = component
                 print(component)
                 control = False
         title = ''
@@ -63,7 +65,7 @@ class SklearnAlgorithms:
             plt.savefig(f'figures/sklearn_pca/components_vs_exp_var_ratio_{title}_{dataset}.png')
             plt.close()
             # plt.show()
-        return vars
+        return vars, thresh
 
 
 

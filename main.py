@@ -10,7 +10,8 @@ from sklearn.decomposition import PCA
 from pca import Pca
 import birch, kmeans
 from visualization import Visualization
-
+import time
+from sklearn_PCA import SklearnAlgorithms
 import reduceDimensionality
 
 from sklearn.feature_selection import SelectKBest, SelectPercentile, f_classif, chi2, mutual_info_classif
@@ -165,6 +166,8 @@ if __name__ == '__main__':
     #     plt.show()
 
 
+
+
     #####################################
     #                PCA                #
     #####################################
@@ -216,6 +219,82 @@ if __name__ == '__main__':
     # # print("Covariance matrix")
     # # print(pca.get_covariance())
     #
+
+    ############################
+    #   SKLEARN PCA AND IPCA   #
+    ############################
+
+    sk_adult = SklearnAlgorithms(preprocessing.pp_adult_df)
+    sk_pen = SklearnAlgorithms(preprocessing.pp_pen_based_df)
+    sk_vowel = SklearnAlgorithms(preprocessing.pp_vowel_df)
+
+    # 1. NUMBER OF COMPONENTS STUDY
+
+    # adult-based
+    feat_adult = preprocessing.pp_adult_df.shape[1]  # 108
+    n_components_adult = np.arange(1, feat_adult)
+
+    # pen-based
+    feat_pen = preprocessing.pp_pen_based_df.shape[1]  # 16
+    n_components_pen = np.arange(1, feat_pen)
+
+    # vowel
+    feat_vowel = preprocessing.pp_vowel_df.shape[1]  # 29
+    n_components_vowel = np.arange(1, feat_vowel)
+
+    # # 1.1. PCA
+
+    # adult
+    variances_pca_adult, thresh_adult = sk_adult.explore_ncomponents(n_components_adult, True, 'Adult')
+    start_time = time.time()
+    results_pca_adult = sk_adult.func_sklearn(0, thresh_adult, True, 'Adult')
+    end_time = time.time()
+    print(f"PCA time Adult: {end_time - start_time} seconds")
+    scree_plot(results_pca_adult[4], dataset='Adult', algorithm='PCA')
+
+    # pen-based
+    variances_pca_pen, thresh_pen = sk_pen.explore_ncomponents(n_components_pen, True, 'Pen-based')
+    start_time = time.time()
+    results_pca_pen = sk_pen.func_sklearn(0, thresh_pen, True, 'Pen-based')  # CHANGE n_components
+    end_time = time.time()
+    print(f"PCA time Pen-based: {end_time - start_time} seconds")
+    scree_plot(results_pca_pen[4], dataset='Pen-based', algorithm='PCA')
+
+    # vowel
+    variances_pca_vowel, thresh_vowel = sk_vowel.explore_ncomponents(n_components_vowel, True, 'Vowel')
+    start_time = time.time()
+    results_pca_vowel = sk_vowel.func_sklearn(0, thresh_vowel, True, 'Vowel')
+    end_time = time.time()
+    print(f"PCA time Vowel: {end_time - start_time} seconds")
+    scree_plot(results_pca_vowel[4], dataset='Vowel', algorithm='PCA')
+
+    # # 1.2. IPCA
+
+    # # adult-based
+    variances_ipca_adult = sk_adult.explore_ncomponents(n_components_adult, True, 'Adult', 1)
+    start_time = time.time()
+    results_ipca_adult = sk_adult.func_sklearn(1, 23, True, 'Adult')
+    end_time = time.time()
+    print(f"IPCA time Adult: {end_time - start_time} seconds")
+    scree_plot(results_ipca_adult[4], dataset='Adult', algorithm='IPCA')
+
+    # pen-based
+    variances_ipca_pen = sk_pen.explore_ncomponents(n_components_pen, True, 'Pen-based', 1)
+    start_time = time.time()
+    results_ipca_pen = sk_pen.func_sklearn(1, 8, True, 'Pen-based')
+    end_time = time.time()
+    print(f"IPCA time Pen-based: {end_time - start_time} seconds")
+    scree_plot(results_ipca_pen[4], dataset='Pen-based', algorithm='IPCA')
+
+    # vowel
+    variances_ipca_vowel = sk_vowel.explore_ncomponents(n_components_vowel, True, 'Vowel', 1)  # CHANGE n_components
+    start_time = time.time()
+    results_ipca_vowel = sk_vowel.func_sklearn(1, 10, True, 'Vowel')
+    end_time = time.time()
+    print(f"IPCA time Vowel: {end_time - start_time} seconds")
+    scree_plot(results_ipca_vowel[4], dataset='Vowel', algorithm='IPCA')
+
+
     # #####################################
     # #             Truncated SVD         #
     # #####################################
